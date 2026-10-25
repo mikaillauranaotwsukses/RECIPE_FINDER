@@ -1,0 +1,9 @@
+# Smart Recipe Finder — .gitignore
+
+# API Key — JANGAN commit ke Git!
+config.js
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/

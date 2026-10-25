@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Recipe Finder — Masak dari Bahan yang Ada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header>
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="logo-text">Smart Recipe Finder</div>
+            <div class="logo-sub">Masak dari bahan yang ada</div>
+          </div>
+        </div>
+        <span class="badge-gemini">Gemini AI</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── MAIN ── -->
+  <main class="container">
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1>Punya bahan apa di dapur?<br><span>Kami carikan resepnya.</span></h1>
+      <p>Masukkan bahan-bahan yang kamu punya, dan AI kami akan merekomendasikan 3 resep lezat yang bisa kamu masak sekarang juga.</p>
+    </section>
+
+    <!-- API Key Notice (diisi dinamis oleh app.js) -->
+    <div class="api-notice" id="apiNotice">Memuat konfigurasi...</div>
+
+    <!-- Input Card -->
+    <div class="input-card">
+      <label class="input-label" for="ingredientInput">Bahan-bahan yang kamu punya</label>
+      <div class="input-wrap">
+        <textarea
+          id="ingredientInput"
+          placeholder="Contoh: ayam, bawang merah, bawang putih, kecap manis, tomat, telur, tepung terigu..."
+        ></textarea>
+      </div>
+      <p class="input-hint">Pisahkan setiap bahan dengan koma. Semakin banyak bahan yang kamu tulis, semakin relevan rekomendasinya!</p>
+
+      <!-- Quick-fill chips -->
+      <div class="chips-row">
+        <span class="chip" onclick="addExample('Paket Nasi Goreng')">🍳 Nasi Goreng</span>
+        <span class="chip" onclick="addExample('Paket Sayur')">🥦 Sayur Sehat</span>
+        <span class="chip" onclick="addExample('Paket Ayam')">🍗 Menu Ayam</span>
+        <span class="chip" onclick="addExample('Paket Mie')">🍜 Mie Favorit</span>
+        <span class="chip" onclick="addExample('Paket Telor')">🥚 Olahan Telor</span>
+      </div>
+
+      <button class="btn-find" id="findBtn" onclick="findRecipes()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        Carikan Resep Untukku
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-wrap" id="loadingWrap">
+      <div class="loader-dots">
+        <span></span><span></span><span></span>
+      </div>
+      <p class="loading-text" id="loadingText">AI sedang menganalisis bahan-bahanmu...</p>
+    </div>
+
+    <!-- Error Banner -->
+    <div class="error-banner" id="errorBanner"></div>
+
+    <!-- Results -->
+    <section id="results">
+      <div class="results-header">
+        <h2 class="results-title">Rekomendasi Resep</h2>
+        <span class="results-count" id="resultsCount">3 resep ditemukan</span>
+      </div>
+      <div id="cardsContainer"></div>
+
+      <div class="moti-banner">
+        <div class="moti-icon">🌟</div>
+        <div class="moti-text">
+          <strong>Kamu bisa melakukannya!</strong>
+          Memasak bukan soal punya bahan yang sempurna — tapi soal kreativitas dengan apa yang ada. Selamat memasak dan jangan lupa nikmati setiap prosesnya!
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <div class="powered-by container">
+    Ditenagai oleh <a href="https://deepmind.google/technologies/gemini/" target="_blank">Google Gemini AI</a>
+    &nbsp;·&nbsp; Smart Recipe Finder &copy; 2025
+  </div>
+
+  <!--
+    config.js HARUS dimuat SEBELUM app.js.
+    File config.js ada di .gitignore — jangan commit ke Git!
+    Salin config.example.js → config.js lalu isi API key kamu.
+  -->
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
